@@ -56,7 +56,7 @@ maar die ik oversla in deze presentatie
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Introduction to Pandas</title>
+    <title>Introduction to imbalanced-learn</title>
     <meta charset="utf-8">
       <link rel="stylesheet" type="text/css" href="slides.css">
 <!--    <style>
@@ -79,15 +79,10 @@ maar die ik oversla in deze presentatie
 
 class: center, middle
 
-# Introduction to Pandas
-
-Inria, May 18, 2017
-
-Joris Van den Bossche
-
-https://jorisvandenbossche.github.io/talks/2017_INRIA_pandas
-
-https://github.com/jorisvandenbossche/talks/
+## Introduction to imbalanced-learn
+#### Leverage knowledge from under-represented classes in machine learning
+##### Guillaume Lemaitre
+###### PyParis 2017
 
 .affiliations[
   ![:scale 65%](img/logoUPSayPlusCDS_990.png)
@@ -95,159 +90,201 @@ https://github.com/jorisvandenbossche/talks/
 ]
 
 ---
+### The curse of imbalanced data set
 
-# Why Python for data analysis?
+<center>![:scale 70%](img/imbalanced.png)</center>
 
-### High level language
-### General purpose
-### Excellent interactive use
+---
+### The curse of imbalanced data set
 
+Applications
+
+* Bioinformatics
+* Medical imaging: diseases *versus* healthy
+* Social sciences: prediction of academic droupout
+* Web services: Service Level Agreement violation prediction
+* Security services: fraud detection
+
+---
+### `TransformerMixin` in `scikit-learn`
+
+Reduce the number of features in `X`: extraction and selection
+
+.pull-left[
 ```python
-from sklearn.datasets import load_boston
-dataset = load_boston()
+X = [[ 0.14,  0.05,  0.33,  0.63],
+     [ 0.48,  0.1 ,  0.29,  0.33],
+     [ 0.63,  0.25,  0.28,  0.79],
+     [ 0.35,  0.95,  0.11,  0.57],
+     [ 0.13,  0.33,  0.43,  0.48]]
 ```
+]
+.pull-right[
+```python
+X_red = [[ 0.33,  0.63],
+         [ 0.29,  0.33],
+         [ 0.28,  0.79],
+         [ 0.11,  0.57],
+         [ 0.43,  0.48]])
+```
+]
+
+Transform `X` by scaling, normalizing, etc.
+
+.pull-left[
+```python
+X = [[ 0.14,  0.05,  0.33,  0.63],
+     [ 0.48,  0.1 ,  0.29,  0.33],
+     [ 0.63,  0.25,  0.28,  0.79],
+     [ 0.35,  0.95,  0.11,  0.57],
+     [ 0.13,  0.33,  0.43,  0.48]]
+```
+]
+.pull-right[
+```python
+X_sc = [[-1.05, -0.9 ,  0.41,  0.47],
+        [ 0.68, -0.73,  0.03, -1.5 ],
+        [ 1.48, -0.26, -0.08,  1.5 ],
+        [ 0.01,  1.9 , -1.72,  0.05],
+        [-1.12, -0.01,  1.36, -0.52]]
+```
+]
+
+
+---
+### `TransformerMixin` in `scikit-learn`
+
+Transform `y` by encoding, binarizing, or transforming
+
+.pull-left[
+```python
+y = ['A', 'B', 'B', 'A', 'C', 'C']
+```
+]
+.pull-right[
+```python
+y_enc = [0, 1, 1, 0, 2, 2]
+```
+]
+
+
+Limitation
+
+* Impossible to reduce the number of samples
+* `sample_weight` and `class_weight` solutions
+
+Need
+
+* **Implementation of a `SamplerMixin`**
+
+
+
+---
+
+### The `scikit-learn` dilemma
+
+Explosion of machine learning algorithms from pre-processing to classifiers/regressors
 
 --
 count: false
 
-### + a rich ecosystem of tools for scientific computing and data analysis.
+<center>![:scale 40%](img/swiss_army.jpg)</center>
 
+--
+count: false
 
+### Entry barrer in `scikit-learn`
+
+* 3 years since publications
+* 200+ citations
+* **clear-cut improvement**
+
+---
+
+### Quality in `scikit-learn`
+
+For each PR, a large amount of time is spent for:
+
+* Consistency in the API
+* Ensure to reach both good speed and performance
+
+--
+
+<center>![:scale 60%](img/pr_merge.png)</center>
+
+---
+### Emergence of `scikit-learn-contrib`
+
+<center><img src="img/transfer.png" alt="Drawing" style="width:300px;height: 100px;"/></center>
+
+### Requirements
+
+* Compatible with `scikit-learn` estimators -> `check_estimators()`
+* API and User Guide documentation
+* PEP8, unit tests and CI
+
+---
+### Emergence of `scikit-learn-contrib`
+
+<center><img src="img/transfer.png" alt="Drawing" style="width:300px;height: 100px;"/></center>
+
+### Advantages
+
+#### Programming POV
+
+* implementation of bleeding edge algorithms
+* experimental feature and API testing
+* speed and performance benchmarks
+
+#### Developer POV
+
+* empower contributors
 
 ---
 class: center, middle
+# `imbalanced-learn` API
 
-# Python's scientific ecosystem
+`datasets`
 
+`fit`, `sample`, `fit_sample`
 
-#### ## Thanks to Jake VanderPlas for the figure
+`Pipeline`
 
+`metrics`
+
+---
+### Algorithms
+
+Over-sampling
+
+Under-sampling
+
+* Prototype generation
+* Prototype selection
+  * Strict under-sampling
+  * Cleaning algorithms
+
+Combination
+
+Ensemble
 
 
 ---
-class: center, middle, bgheader
-background-image: url(img/JakeVdP-ecosystem1.svg)
-background-size: cover
+### Medical imaging examples
+
+Melanoma classification:
+
+Prostate cancer segmentation:
 
 ---
-count: false
-class: center, middle, bgheader
-background-image: url(img/JakeVdP-ecosystem2.svg)
-background-size: cover
+### Perspectives
 
----
-count: false
-class: center, middle, bgheader
-background-image: url(img/JakeVdP-ecosystem3.svg)
-background-size: cover
+* Support sparse matrices
+* Support categorical features
+* Quantitative benchmark
+* Fast Nearest-Neighbors algorithm
 
----
-count: false
-class: center, middle, bgheader
-background-image: url(img/JakeVdP-ecosystem4.svg)
-background-size: cover
-
----
-count: false
-class: center, middle, bgheader
-background-image: url(img/JakeVdP-ecosystem5.svg)
-background-size: cover
-
-
-
-
----
-class: center, middle
-
-![](img/pandas_logo.svg)
-
----
-
-## Pandas: data analysis in python
-
-For data-intensive work in Python the [Pandas](http://pandas.pydata.org) library has become essential.
-
-What is `pandas`?
-
-* Pandas can be thought of as *NumPy arrays with labels* for rows and columns, and better support for heterogeneous data types, but it's also much, much more than that.
-* Pandas can also be thought of as `R`'s `data.frame` in Python.
-* Powerful for working with missing data, working with time series data, for reading and writing your data, for reshaping, grouping, merging your data, ...
-
-It's documentation: http://pandas.pydata.org/pandas-docs/stable/
-
----
-
-# When do you need pandas?
-
-When working with **tabular or structured data** (like R dataframe, SQL table, Excel spreadsheet, ...):
-
-- Import data
-- Clean up messy data
-- Explore data, gain insight into data
-- Process and prepare your data for analysis
-- Analyse your data (together with scikit-learn, statsmodels, ...)
-
-
----
-
-# Key features
-
-* Fast, easy and flexible input/output for a lot of different data formats
-* Working with missing data (`.dropna()`, `pd.isnull()`)
-* Merging and joining (`concat`, `join`)
-* Grouping: `groupby` functionality
-* Reshaping (`stack`, `pivot`)
-* Powerful time series manipulation (resampling, timezones, ..)
-* Easy plotting
-
-
-
----
-
-# Showcase notebook
-
-* Interact with your data
-* Import / export for variety of formats
-* Easy plotting
-* Set of powerful methods to maniputlate data
-
-https://github.com/jorisvandenbossche/talks/blob/master/2017_INRIA_pandas/pandas_introduction.ipynb (solved version is available in same repo)
-
----
-
-# Further reading
-
-* Pandas documentation: http://pandas.pydata.org/pandas-docs/stable/
-
-* Books
-    * "Python for Data Analysis" by Wes McKinney
-    * "Python Data Science Handbook" by Jake VanderPlas
-
----
-
-# Further reading
-
-* Tutorials
-  * https://github.com/jorisvandenbossche/pandas-tutorial
-  * https://github.com/brandon-rhodes/pycon-pandas-tutorial
-
-* Tom Augspurger's blog
-  * https://tomaugspurger.github.io/modern-1.html
-
----
-class: middle
-
-# Thanks for listening!
-
-
-## Those slides:
-
-- [jorisvandenbossche.github.io/talks/2016_INRIA_pandas](
-    http://jorisvandenbossche.github.io/talks/2017_INRIA_pandas)
-
-
-
-
+### We are hiring (unpaid ...)
 
     </textarea>
 <!--    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
