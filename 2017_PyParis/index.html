@@ -177,8 +177,6 @@ Need
 
 * **Implementation of a `SamplerMixin`**
 
-
-
 ---
 
 ### The `scikit-learn` dilemma
@@ -253,28 +251,188 @@ class: center, middle
 `metrics`
 
 ---
-### Algorithms
+### `datasets` module
 
-Over-sampling
+```python
+>>> from imblearn.datasets import fetch_datasets
+>>> fetch_datasets
 
-Under-sampling
+>>> fetch_datasets?
 
-* Prototype generation
-* Prototype selection
-  * Strict under-sampling
-  * Cleaning algorithms
++--+--------------+-------------------------------+-------+---------+-----+
+|ID|Name          | Repository & Target           | Ratio | #S      | #F  |
++==+==============+===============================+=======+=========+=====+
+|1 |ecoli         | UCI, target: imU              | 8.6:1 | 336     | 7   |
++--+--------------+-------------------------------+-------+---------+-----+
+|2 |optical_digits| UCI, target: 8                | 9.1:1 | 5,620   | 64  |
++--+--------------+-------------------------------+-------+---------+-----+
+|3 |satimage      | UCI, target: 4                | 9.3:1 | 6,435   | 36  |
++--+--------------+-------------------------------+-------+---------+-----+
+|4 |pen_digits    | UCI, target: 5                | 9.4:1 | 10,992  | 16  |
++--+--------------+-------------------------------+-------+---------+-----+
+|5 |abalone       | UCI, target: 7                | 9.7:1 | 4,177   | 10  |
++--+--------------+-------------------------------+-------+---------+-----+
+|6 |sick_euthyroid| UCI, target: sick euthyroid   | 9.8:1 | 3,163   | 42  |
 
-Combination
-
-Ensemble
-
+```
 
 ---
-### Medical imaging examples
+### `datasets` module
 
-Melanoma classification:
+```python
+>>> dataset = fetch_datasets()['satimage']
+>>> dataset
 
-Prostate cancer segmentation:
+{'DESCR': 'satimage',
+ 'data': array([[  92.,  115.,  120., ...,  107.,  113.,   87.],
+                [  84.,  102.,  106., ...,   99.,  104.,   79.],
+                [  84.,  102.,  102., ...,   99.,  104.,   79.],
+                ..., 
+                [  56.,   68.,   91., ...,   83.,   92.,   74.],
+                [  56.,   68.,   87., ...,   83.,   92.,   70.],
+                [  60.,   71.,   91., ...,   79.,  108.,   92.]]),
+ 'target': array([-1, -1, -1, ..., -1, -1, -1])}
+```
+
+```python
+>>> from collections import Counter
+>>> X = dataset.data
+>>> y = dataset.target
+>>> Counter(y)
+Counter({-1: 5809, 1: 626})
+```
+
+---
+### `fit`, `sample`, `fit_sample`
+
+```python
+>>> from imblearn.over_sampling import SMOTE
+
+>>> smote = SMOTE(ratio='auto')
+>>> X_resampled, y_resampled = smote.fit_sample(X, y)
+
+>>> Counter(y_resampled)
+Counter({-1: 5809, 1: 5809})
+```
+
+### `ratio` parameter
+
+* `str`: `'auto'`, `'all'`, `'minority'`, `'majority'`, `'not_minority'`
+* `dict`: key -> class; value -> # samples
+* `func` : function returning a similar `dict` as previously stated
+
+---
+### `Pipeline` and `make_pipeline`
+
+```python
+>>> from sklearn.datasets import make_classification
+>>> X, y = make_classification(n_samples=5000, n_features=2, n_informative=2,
+                               n_redundant=0, n_repeated=0, n_classes=3,
+                               n_clusters_per_class=1, weights=[0.01, 0.04, 0.95],
+                               class_sep=0.8, random_state=0)
+```
+
+<center>![:scale 60%](img/toy.png)</center>
+
+---
+### `Pipeline` and `make_pipeline`
+
+```python
+>>> from sklearn.model_selection import train_test_split
+>>> X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+```
+
+#### `scikit-learn`
+
+```python
+>>> from sklearn.pipeline import make_pipeline
+>>> from sklearn.decomposition import PCA
+>>> from sklearn.linear_model import LogisticRegressionCV
+
+>>> pipeline = make_pipeline(PCA(), LogisticRegressionCV())
+>>> pipeline.fit(X_train, y_train)
+>>> pipeline.predict(X_test)
+```
+
+#### `imbalanced-learn`
+
+```python
+>>> from imblearn.pipeline import make_pipeline
+
+>>> pipeline_smote = make_pipeline(SMOTE(), PCA(), LogisticRegressionCV())
+>>> pipeline_smote.fit(X_train, y_train)
+>>> pipeline_smote.predict(X_test)
+```
+
+---
+### `metrics`
+
+```python
+>>> print('Score pipeline:', pipeline.score(X_test, y_test))
+Score pipeline: 0.9808
+>>> print('Score pipeline:', pipeline_smote.score(X_test, y_test))
+Score pipeline: 0.9752
+```
+
+```python
+>>> y_pred = pipeline_smote.predict(X_test)
+>>> print(classification_report_imbalanced(y_test, y_pred))
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.83      0.94      1.00      0.88      0.91      0.82        16
+          1       0.67      0.91      0.98      0.77      0.82      0.65        54
+          2       1.00      0.98      0.94      0.99      0.85      0.74      1180
+
+avg / total       0.98      0.98      0.95      0.98      0.85      0.74      1250
+```
+
+.pull-left[
+<center>![:scale 90%](img/cm1.png)</center>
+]
+.pull-right[
+<center>![:scale 90%](img/cm2.png)</center>
+]
+
+---
+class: center, middle
+# Algorithm specificities
+
+---
+### Over-sampling algorithms
+
+<center>![:scale 75%](img/over_sampling.png)</center>
+
+---
+### Under-sampling algorithms
+
+<center>![:scale 55%](img/under_sampling.png)</center>
+
+---
+### Cleaning algorithms
+
+<center>![:scale 75%](img/cleaning.png)</center>
+
+---
+### Melanoma classification
+
+<center>![:scale 100%](img/melanoma_framework.png)</center>
+
+<center>![:scale 100%](img/melanoma_results.png)</center>
+
+---
+### Prostate cancer detection
+
+<center>![:scale 60%](img/prostate_framework.png)</center>
+
+<center>![:scale 50%](img/prostate_results.png)</center>
+
+---
+### Perspectives
+
+* Support sparse matrices
+* Support categorical features
+* Quantitative benchmark
+* Fast Nearest-Neighbors algorithm
 
 ---
 ### Perspectives
@@ -285,6 +443,8 @@ Prostate cancer segmentation:
 * Fast Nearest-Neighbors algorithm
 
 ### We are hiring (unpaid ...)
+
+* We want a [MRG+2] policy but we are 2 main contributors
 
     </textarea>
 <!--    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
