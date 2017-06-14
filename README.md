@@ -16,5 +16,4 @@ the imbalanced-learn package which implement some of the state-of-the-art
 algorithms, tackling the class imbalance problem.
 
 <a href="2017_PyParis" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
-<a href="2017_PyParis" class="btn"> <i class="fa fa-file-code-o"></i> Notebook</a>
 <a href="https://github.com/scikit-learn-contrib/imbalanced-learn" class="btn"> <i class="fa fa-github"></i> Package</a>
