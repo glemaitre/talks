@@ -2,6 +2,22 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# Euroscipy 2017
+
+## Leverage knowledge from under-represented classes in machine learning: imbalanced-learn release 0.3.0
+
+*Abstract*: The curse of imbalanced data set refers to data sets in which the
+number of samples in one class is less than in others. This issue is often
+encountered in real world data sets such as medical imaging applications
+(e.g. cancer detection), fraud detection, etc. In such particular condition,
+machine learning algorithms learn sub-optimal models which will generally favor
+the class having the largest number of samples. In this talks, we present the
+new feature which are available in the release 0.3.0.
+
+<a href="2017_euroscipy" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://github.com/scikit-learn-contrib/imbalanced-learn" class="btn"> <i class="fa fa-github"></i> Package</a>
+
+
 # PyParis 2017
 
 ## Leverage knowledge from under-represented classes in machine learning: an introduction to imbalanced-learn
