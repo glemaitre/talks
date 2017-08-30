@@ -107,10 +107,10 @@ Applications
 
 ---
 class: center, middle
-# `scikit-learn` offers
+# What scikit-learn offers?
 
 ---
-### `TransformerMixin` in `scikit-learn`
+### Transformers in scikit-learn
 
 Reduce the number of features in `X`: extraction and selection
 
@@ -156,7 +156,7 @@ X_sc = [[-1.05, -0.9 ,  0.41,  0.47],
 
 
 ---
-### `TransformerMixin` in `scikit-learn`
+### Transformers in scikit-learn
 
 Transform `y` by encoding, binarizing, or transforming
 
@@ -179,38 +179,38 @@ Limitation
 
 Need
 
-* **Implementation of a `SamplerMixin`**
+* **Implementation of specific samplers**
 
 ---
 
-### The `scikit-learn` dilemma
+### The scikit-learn dilemma
 
 * Emergence of a large number machine learning algorithms
 
-### Entry barrer in `scikit-learn`
+### Entry barrer in scikit-learn
 
 * 3 years since publications / 200+ citations
 * **clear-cut improvement**
 
-### Quality in `scikit-learn`
+### Quality in scikit-learn
 
 * Consistency in the API
 * Ensure to reach both good speed and performance
 
 ---
-### Emergence of `scikit-learn-contrib`
+### Emergence of scikit-learn-contrib
 
 <center><img src="img/transfer.png" alt="Drawing" style="width:300px;height: 100px;"/></center>
 
 ### Requirements
 
-* Compatible with `scikit-learn` estimators -> `check_estimators()`
+* Compatible with scikit-learn estimators -> `check_estimators()`
 * API and User Guide documentation
 * PEP8, unit tests and CI
 
 ---
 count: false
-### Emergence of `scikit-learn-contrib`
+### Emergence of scikit-learn-contrib
 
 <center><img src="img/transfer.png" alt="Drawing" style="width:300px;height: 100px;"/></center>
 
@@ -228,21 +228,21 @@ count: false
 
 ---
 class: center, middle
-# `imbalanced-learn` API
+# imbalanced-learn API
 
 `fit`, `sample`, `fit_sample`
 
-`datasets`
+datasets
 
-`Pipeline`
+pipeline
 
-`metrics`
+metrics
 
 classifier
 
 ---
 
-## `SamplerMixin`
+## Samplers
 
 ### `fit`, `sample`, `fit_sample`
 
@@ -265,7 +265,8 @@ Counter({-1: 5809, 1: 5809})
 ---
 ### Over-sampling
 
-<center>![:scale 75%](img/sphx_glr_plot_comparison_over_sampling_0062.png)</center>
+<center>![:scale 40%](img/original.png)</center>
+<center>![:scale 70%](img/oversampling.png)</center>
 
 ---
 count: false
@@ -294,7 +295,7 @@ count: false
 
 ### Combined over-sampling and under-sampling methods
 
-<center>![:scale 60%](img/combine.png)</center>
+<center>![:scale 90%](img/combine.png)</center>
 
 ---
 ### Over-sampling
@@ -316,7 +317,7 @@ count: false
 * SMOTE + ENN / SMOTE + Tomek
 
 ---
-### `datasets` module
+### datasets module
 
 ```python
 >>> from imblearn.datasets import fetch_datasets
@@ -343,7 +344,7 @@ count: false
 
 ---
 count: false
-### `datasets` module
+### datasets module
 
 #### `fetch_datasets`
 
@@ -381,7 +382,7 @@ Counter({0: 50, 1: 20, 2: 25})
 >>> X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
 ```
 
-#### `scikit-learn`
+#### scikit-learn
 
 ```python
 >>> from sklearn.pipeline import make_pipeline
@@ -393,7 +394,7 @@ Counter({0: 50, 1: 20, 2: 25})
 >>> pipeline.predict(X_test)
 ```
 
-#### `imbalanced-learn`
+#### imbalanced-learn
 
 ```python
 >>> from imblearn.pipeline import make_pipeline
@@ -404,7 +405,7 @@ Counter({0: 50, 1: 20, 2: 25})
 ```
 
 ---
-### `metrics`
+### metrics module
 
 ```python
 >>> print('Score pipeline:', pipeline.score(X_test, y_test))
