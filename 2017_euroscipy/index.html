@@ -81,7 +81,7 @@ class: center, middle
 
 ## Imbalanced-learn
 #### Leverage knowledge from under-represented classes in machine learning
-##### **Guillaume Lemaitre** and contributors
+##### Guillaume Lemaitre
 ###### Euroscipy 2017
 
 .affiliations[
@@ -92,7 +92,7 @@ class: center, middle
 ---
 ### The curse of imbalanced data set
 
-<center>![:scale 70%](img/imbalanced.png)</center>
+<center>![:scale 85%](img/sphx_glr_plot_comparison_over_sampling_001.png)</center>
 
 ---
 ### The curse of imbalanced data set
@@ -263,6 +263,59 @@ Counter({-1: 5809, 1: 5809})
 * `func`: function returning a similar `dict` as previously stated
 
 ---
+### Over-sampling
+
+<center>![:scale 75%](img/sphx_glr_plot_comparison_over_sampling_0062.png)</center>
+
+---
+count: false
+
+### Under-sampling
+
+* Prototype generation
+
+<center>![:scale 90%](img/sphx_glr_plot_comparison_under_sampling_001.png)</center>
+
+* Prototype selection
+
+<center>![:scale 90%](img/sphx_glr_plot_comparison_under_sampling_002.png)</center>
+
+---
+count: false
+
+### Under-sampling
+
+* Cleaning under-sampling
+
+<center>![:scale 90%](img/cleaning.png)</center>
+
+---
+count: false
+
+### Combined over-sampling and under-sampling methods
+
+<center>![:scale 60%](img/combine.png)</center>
+
+---
+### Over-sampling
+
+* Random over-sampling / SMOTE / ADASYN
+
+### Controlled under-sampling
+
+* Random under-sampling / NearMiss
+
+### Cleaning under-sampling
+
+* Condensed nearest-neighbors and variants
+* Edited nearest neighbors and variants
+* Instance hardness threshold
+
+### Combine over- and under-sampling
+
+* SMOTE + ENN / SMOTE + Tomek
+
+---
 ### `datasets` module
 
 ```python
@@ -408,10 +461,10 @@ avg / total       0.98      0.98      0.95      0.98      0.85      0.74      12
 ---
 ### What else in 0.3.0?
 
-* support for multi-class for all algorithms,
-* support for sparse-matrices,
-* new user guide,
-* migration from nosetest to pytest.
+* support for multi-class for all algorithms
+* support for sparse-matrices
+* new user guide
+* migration from nosetest to pytest
 
 ### How to install it ...
 
@@ -429,81 +482,6 @@ $ conda install -c glemaitre imbalanced-learn
 
 ---
 class: center, middle
-# Algorithm specificities
-
----
-### Over-sampling algorithms
-
-#### Random over-sampling
-
-<center>![:scale 90%](img/sphx_glr_plot_comparison_over_sampling_002.png)</center>
-
----
-count: false
-### Over-sampling algorithms
-
-#### SMOTE & ADASYN
-
-<center>![:scale 70%](img/sphx_glr_plot_comparison_over_sampling_005.png)</center>
-
----
-count: false
-### Over-sampling algorithms
-
-#### Different SMOTE versions
-
-<center>![:scale 70%](img/sphx_glr_plot_comparison_over_sampling_0061.png)</center>
-
----
-count: false
-### Over-sampling algorithms
-
-#### Different SMOTE versions
-
-<center>![:scale 70%](img/sphx_glr_plot_comparison_over_sampling_0062.png)</center>
-
----
-### Under-sampling algorithms
-
-#### Prototype generation: Clustering
-
-<center>![:scale 80%](img/sphx_glr_plot_comparison_under_sampling_001.png)</center>
-
-#### Prototype selection: Random under-sampling
-
-<center>![:scale 80%](img/sphx_glr_plot_comparison_under_sampling_002.png)</center>
-
----
-count: false
-### Under-sampling algorithms
-
-#### Prototype selection: NearMiss
-
-<center>![:scale 40%](img/sphx_glr_plot_comparison_under_sampling_003.png)</center>
-
----
-count: false
-### Cleaning algorithms
-
-#### Edited nearest neighbours
-
-<center>![:scale 40%](img/sphx_glr_plot_comparison_under_sampling_004.png)</center>
-
----
-count: false
-### Cleaning algorithms
-
-#### Condensed nearest neighbors and others
-
-<center>![:scale 40%](img/sphx_glr_plot_comparison_under_sampling_005.png)</center>
-
----
-### Combined over-sampling and under-sampling methods
-
-<center>![:scale 40%](img/sphx_glr_plot_comparison_combine_001.png)</center>
-
----
-class: center, middle
 # Future work
 
 ---
@@ -513,6 +491,8 @@ class: center, middle
 * Quantitative benchmark
 * Fast Nearest-Neighbors algorithm
 * Create a `keras` submodule specifically for sampling in deep learning
+
+### Want to discuss -> come to scikit-learn sprint on Friday ...
 
     </textarea>
 <!--    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
