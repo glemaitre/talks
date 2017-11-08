@@ -1,0 +1,195 @@
+<!--
+
+1. Problem statement
+2. Dataset
+   2.1 R-fMRI data
+   2.2 Structural MRI data
+3. Data analysis
+   3.1 R-fMRI data analysis
+   3.2 Structual data analysis
+   3.3 Ground-truth
+4. RAMP preps
+   4.1 Define the problem: a) define the prediction problem and b) agree on the feature engineering
+   4.2 Review of the available data
+   4.3 Pre-processing and quality check of the data processing
+   4.4 Upcoming: Design the boundaries of our problem such that data scientists only focus on the core problem
+   4.5 RAMP challenge + brain hack
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RAMP on prediction of autism</title>
+    <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="slides.css">
+    <style>
+      /* @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz); */
+      /* @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic); */
+      /* @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic); */
+
+      /* body { font-family: 'Droid Serif'; } */
+      /* h1, h2, h3 { */
+      /*   font-family: 'Yanone Kaffeesatz'; */
+      /*   font-weight: normal; */
+      /* } */
+      /* .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; } */
+      /* #slideshow .slide .content .cols.two .col { width: 48%; } */
+      .red    { color: #FF4943; }
+      .gray   { color: #787878; }
+      .green  { color: #87A558; }
+      .blue   { color: #41C8F0; }
+      .yellow { color: #DBEC62; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+## RAMP
+#### Prediction of autism using functional and structural MRI
+##### Guillaume Lemaitre
+###### CDS Pitching Day 2017
+
+.affiliations[
+  ![:scale 65%](img/logoUPSayPlusCDS_990.png)
+  ![:scale 25%](img/inria-logo.png)
+]
+
+---
+### Project overview
+
+* Collaboration with the Institut Pateur
+
+### Problem statement
+
+* Classification of autism spectrum disorder (ASD) vs. control subjects
+
+### Dataset
+
+* Type of data: resting-state functional MRI (R-fMRI) and structural MRI
+* ABIDE I: 539 ASD / 573 controls -> 17 sites
+* ABIDE II: 521 ASD / 593 controls -> 19 sites
+* Robert Debre Hospital: around 1000 subjects
+
+---
+### R-f MRI dataset
+
+* 4D dataset -> 3D (volume) + T (time)
+
+.center[<iframe width="600" height="300" src="http://www.youtube.com/embed/l7iWbfvOycs?rel=0" frameborder="0" allowfullscreen></iframe>]
+
+* Time -> change of oxygenation -> neuronal activation
+* Analysis of the functional connectivity
+
+---
+### R-f MRI dataset
+
+#### Connectome classification pipeline
+
+<center>![:scale 80%](./img/pipeline_fmri.png)</center>
+
+1. ROIs definition
+2. Time-series extraction
+3. Matrix estimation
+4. Classification
+
+---
+### R-f MRI dataset
+
+#### Opening the box
+
+<center>![:scale 100%](./img/fmri-data.png)</center>
+
+#### Powered by nilearn and scikit-learn
+
+<center>![:scale 40%](./img/software.png)</center>
+
+---
+### Structural MRI
+
+<center>![:scale 85%](./img/0136_combo_T1T2_FAST_v5.png)</center>
+
+* Volume, area, cortical thickness, mean curvature ...
+
+### Ground-truth
+
+* Autism status
+* WISCC4 IQ
+* Social responsiveness
+
+---
+### RAMP preparation
+
+* .green[DONE] - Problem definition
+
+---
+### RAMP preparation
+
+* .green[DONE] - Problem definition
+* .green[DONE] - Feature extraction R-fMRI
+
+<center>![:scale 100%](./img/fmri_extr.png)</center>
+
+---
+### RAMP preparation
+
+* .green[DONE] - Problem definition
+* .green[DONE] - Feature extraction R-fMRI
+* .green[DONE] - Feature extraction structural MRI
+
+---
+### RAMP preparation
+
+* .green[DONE] - Problem definition
+* .green[DONE] - Feature extraction R-fMRI
+* .green[DONE] - Feature extraction structural MRI
+* .yellow[ONGOING] - Quality check of the dataset
+
+<center>![:scale 80%](./img/qa.png)</center>
+---
+### RAMP preparation
+
+* .green[DONE] - Problem definition
+* .green[DONE] - Feature extraction R-fMRI
+* .green[DONE] - Feature extraction structural MRI
+* .yellow[ONGOING] - Quality check of the dataset
+* .red[TODO] - Design of RAMP starting kit (classification pipeline)
+* .red[TODO] - Organize brainhack
+
+---
+### Contributions
+
+#### Development
+
+* scikit-learn: https://github.com/scikit-learn/scikit-learn
+* RAMP: https://github.com/paris-saclay-cds/ramp-workflow
+* RAMP kits and preparation: https://github.com/paris-saclay-cds/ramp-pasteur-scraping
+
+#### Usage
+
+* nilearn: https://github.com/nilearn/nilearn
+
+<center>
+  ![:scale 100%](./img/all_soft.png)
+</center>
+
+    </textarea>
+<!--    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>-->
+    <script src="../remark.min.js" type="text/javascript">
+    </script>
+    <script>
+	    remark.macros.scale = function (percentage) {
+          var url = this;
+          return '<img src="' + url + '" style="width: ' + percentage + '" />';
+      };
+      remark.macros.scaleH = function (percentage) {
+          var url = this;
+          return '<img src="' + url + '" style="height: ' + percentage + '" />';
+      };
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>

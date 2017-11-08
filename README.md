@@ -2,6 +2,21 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# CDS Pitching Day 2017
+
+## RAMP on predicting autism from resting-state functional MRI and anatomical MRI
+
+*Abstract*: This talk will present the ongoing preparation of a RAMP aiming at
+distinguishing subjects with Autism Spectrum Disorder (ASD) from typical
+control subjects. This analysis will use the Autism Brain Imaging Data Exchange
+(ABIDE I & II) database and data from Robert Debre Hospital based on R-fMRI and
+anatomical MRI. We will particularly focus on presenting the problematic, the
+typical pipeline answering this problem, and the current status of this RAMP.
+This work is in collaboration with the Pasteur Institute (Neuroanatomy group of
+the Unit of Human Genetics and Cognitive Functions).
+
+<a href="2017_CDS_pitching_talk" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
 # Euroscipy 2017
 
 ## Leverage knowledge from under-represented classes in machine learning: imbalanced-learn release 0.3.0
