@@ -1,0 +1,524 @@
+<!--
+
+Introduction to pandas
+
+
+- why python for scientific computing / data analysis -> whole ecosystem
+- pandas: when working with tabular data (think excel, sql, )
+    -> but can work with these interactively, or automate, or integrate with whole ecosystem
+
+- showcase
+  - often used in preprocessing for further analysis
+  - but also for exploring data -> that is about looking your data, and answering questions about your data
+  => eg titanic data: whas there a difference in survival ratio for the different classes?
+  => eg was there a decrease in concentrations (can then of course further analyse this, see if decrease is significant),
+        or what is the distribution? different stations?
+        how does the daily profile look like?
+        and does this differ between weekday and weekendday?
+
+  - we can do that in few lines of code
+
+
+- go over a few topics in a bit more detail
+
+    1. input / output (and do with titanic dataset)
+
+    2, exploration (see data, plot data, general statistics about the data)
+
+    3. filtering data / Selecting data
+
+        column or columns
+
+        filtering df[condition]
+
+    2. groupby
+
+    3. resample / timeseries
+
+    4. reshape
+
+    5. join / merge ?
+
+
+
+Laat een aantal oefeningen / zaken in de notebook staan die de mensen nog kunnen uitvoeren
+maar die ik oversla in deze presentatie
+
+(solutions behind button -> like continuum notebooks)
+
+
+
+-->
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>imbalanced-learn</title>
+    <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="slides.css">
+<!--    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      #slideshow .slide .content .cols.two .col { width: 48%; }
+    </style>
+-->
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+## Imbalanced-learn
+#### A scikit-learn-contrib to tackle learning from imbalanced data set
+##### **Guillaume Lemaitre**, Christos Aridas, and contributors
+###### Euroscipy 2018
+
+.affiliations[
+  ![:scale 65%](img/logoUPSayPlusCDS_990.png)
+  ![:scale 25%](img/inria-logo.png)
+]
+
+---
+class: center, middle
+# Imbalanced data set
+# -
+# What does it look like?
+
+---
+class: center, middle
+### Typical use cases
+
+#### Cancer segmentation
+
+<center>![:scale 50%](img/new_img/prostate.png)</center>
+
+=> Ratio between healthy and cancerous tissue - 20:1
+
+---
+count: false
+class: center, middle
+### Typical use cases
+
+#### Solar wind classification
+
+<center>![:scale 55%](img/new_img/solar_wind.jpeg)</center>
+
+=> Ratio between all records and solar wind records - 26:1
+
+---
+count: false
+class: center, middle
+### Typical use cases
+
+#### Car insurance claim
+
+<center>![:scale 80%](img/new_img/porto_seguro.png)</center>
+
+=> Ratio between no claim vs claim - 26:1
+
+---
+### Learning becomes difficult
+
+```python
+for weight_minority in [0.05, 0.1, 0.2, 0.5]:
+    X, y = make_classification(weight=(weight_minority, 1 - weight_minority))
+    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+    svc = SVM().fit(X_train, y_test)
+    roc_auc_score(y_test, svc.predict(X_test))
+```
+<center>![:scale 60%](img/new_img/imbalanced_ratio.png)</center>
+
+---
+class: center, middle
+# How can you tackle the issue?
+
+---
+class: center, middle
+# It depends ...
+
+---
+count: false
+class: center, middle
+# It depends ...
+# -
+# 3 different perspectives
+
+---
+### Unsupervised learning - Outlier detection
+
+`X` contains outliers. They are **far** from others.
+
+=> Fit regions where data are concentrated.
+
+```python
+outliers_fraction = 0.05
+anomaly_algorithms = [
+    ("Robust covariance", EllipticEnvelope(contamination=outliers_fraction)),
+    ("One-Class SVM", OneClassSVM(nu=outliers_fraction, kernel="rbf",
+                                  gamma=0.1)),
+    ("Isolation Forest", IsolationForest(behaviour='new',
+                                         contamination=outliers_fraction,
+                                         random_state=42)),
+    ("Local Outlier Factor", LocalOutlierFactor(
+        n_neighbors=35, contamination=outliers_fraction))]
+
+for algorithm in anomaly_algorithms:
+    y_pred = algorithm.fit(X).predict(X)
+    roc_auc_score(y, y_pred)
+```
+
+---
+count: false
+### Unsupervised learning - Outlier detection
+
+`X` contains outliers. They are **far** from others.
+
+=> Fit regions where data are concentrated.
+
+<center>![:scale 60%](img/new_img/outlier_detection.png)</center>
+
+---
+### Semi-supervised learning - Novelty detection
+
+`X` contains outliers. They are **far** from others.
+
+=> At predict, differenctiate **new** observations which does not follow the
+distribution.
+
+```python
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+samples_majority_idx = y_train == 0
+svm = OneClassSVM(nu=0.05, kernel="rbf", gamma=0.2)
+svm.fit(X_train[samples_majority_idx], y_train[samples_majority_idx])
+roc_auc_score(y_test, svm.predict(X_test))
+```
+
+<center>![:scale 40%](img/new_img/novelty_detection.png)</center>
+
+---
+## Supervised learning - Resampling
+
+=> Resample the data set before training the classifier.
+
+```python
+for sampling_strategy in [0.3, 0.5, 0.7, 1]:
+    sampler_method = [
+        ('RandomUnderSampler', RandomUnderSampler(sampling_strategy)),
+        ('ClusterCentroids', ClusterCentroids(sampling_strategy)),
+        ('RandomOverSampler', RandomOverSampler(sampling_strategy)),
+        ('SMOTE', SMOTE(sampling_strategy))
+    ]
+    for sampler in sampler_method:
+        pipe = make_pipeline(sampler, SVC(C=0.1))
+        pipe.fit(X_train, y_train)
+        roc_auc_score(y_test, pipe.predict(X_test))
+```
+
+---
+count: false
+## Supervised learning - Resampling
+
+<center>![:scale 70%](img/new_img/resampling.png)</center>
+
+---
+class: center, middle
+# What scikit-learn offers?
+
+---
+### Transformers in scikit-learn
+
+Reduce the number of features in `X`: extraction and selection
+
+.pull-left[
+```python
+X = [[ 0.14,  0.05,  0.33,  0.63],
+     [ 0.48,  0.1 ,  0.29,  0.33],
+     [ 0.63,  0.25,  0.28,  0.79],
+     [ 0.35,  0.95,  0.11,  0.57],
+     [ 0.13,  0.33,  0.43,  0.48]]
+```
+]
+.pull-right[
+```python
+X_red = [[ 0.33,  0.63],
+         [ 0.29,  0.33],
+         [ 0.28,  0.79],
+         [ 0.11,  0.57],
+         [ 0.43,  0.48]])
+```
+]
+
+Transform `X` by scaling, normalizing, etc.
+
+.pull-left[
+```python
+X = [[ 0.14,  0.05,  0.33,  0.63],
+     [ 0.48,  0.1 ,  0.29,  0.33],
+     [ 0.63,  0.25,  0.28,  0.79],
+     [ 0.35,  0.95,  0.11,  0.57],
+     [ 0.13,  0.33,  0.43,  0.48]]
+```
+]
+.pull-right[
+```python
+X_sc = [[-1.05, -0.9 ,  0.41,  0.47],
+        [ 0.68, -0.73,  0.03, -1.5 ],
+        [ 1.48, -0.26, -0.08,  1.5 ],
+        [ 0.01,  1.9 , -1.72,  0.05],
+        [-1.12, -0.01,  1.36, -0.52]]
+```
+]
+
+
+---
+### Transformers in scikit-learn
+
+Transform `y` by encoding, binarizing, or transforming
+
+.pull-left[
+```python
+y = ['A', 'B', 'B', 'A', 'C', 'C']
+```
+]
+.pull-right[
+```python
+y_enc = [0, 1, 1, 0, 2, 2]
+```
+]
+
+
+Limitation
+
+* Impossible to reduce the number of samples
+* `sample_weight` and `class_weight` solutions
+
+Need
+
+* **Implementation of specific samplers**
+
+---
+### What is scikit-learn-contrib?
+
+<center><img src="img/transfer.png" alt="Drawing" style="width:300px;height: 100px;"/></center>
+
+### Requirements
+
+* Compatible with scikit-learn estimators -> `check_estimators()`
+* API and User Guide documentation
+* PEP8, unit tests and CI
+
+### Advantages
+
+* Implementation of bleeding edge algorithms
+* Experimental feature and API testing
+* Speed and performance benchmarks
+
+---
+class: center, middle
+# imbalanced-learn API
+
+---
+
+## Samplers
+
+### Single method `fit_resample`
+
+```python
+>>> from imblearn.over_sampling import SMOTE
+
+>>> smote = SMOTE(sampling_strategy='auto')
+>>> X_resampled, y_resampled = smote.fit_resample(X, y)
+
+>>> Counter(y_resampled)
+Counter({-1: 5809, 1: 5809})
+```
+
+### Replaced `ratio` by `sampling_strategy`
+
+* `str`: `'auto'`, `'all'`, `'minority'`, `'majority'`, `'not_minority'`
+* `float`: ratio |majority| / |minority|
+* `dict`: key -> class; value -> # samples
+* `func`: function returning a similar `dict` as previously stated
+
+---
+### Over-sampling
+
+* Random over-sampling / SMOTE / ADASYN
+
+### Controlled under-sampling
+
+* Random under-sampling / NearMiss
+
+### Cleaning under-sampling
+
+* Condensed nearest-neighbors and variants
+* Edited nearest neighbors and variants
+* Instance hardness threshold
+
+### Combine over- and under-sampling
+
+* SMOTE + ENN / SMOTE + Tomek
+
+---
+## How to use them?
+
+### `Pipeline` and `make_pipeline`
+
+```python
+>>> from sklearn.model_selection import train_test_split
+>>> X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+```
+
+#### scikit-learn
+
+```python
+>>> from sklearn.pipeline import make_pipeline
+>>> from sklearn.decomposition import PCA
+>>> from sklearn.linear_model import LogisticRegressionCV
+
+>>> pipeline = make_pipeline(PCA(), LogisticRegressionCV())
+>>> pipeline.fit(X_train, y_train)
+>>> pipeline.predict(X_test)
+```
+
+#### imbalanced-learn
+
+```python
+>>> from imblearn.pipeline import make_pipeline
+
+>>> pipeline_smote = make_pipeline(SMOTE(), PCA(), LogisticRegressionCV())
+>>> pipeline_smote.fit(X_train, y_train)
+>>> pipeline_smote.predict(X_test)
+```
+
+---
+### Metrics module
+
+```python
+>>> from imblearn.metrics import classification_report_imbalanced
+>>> y_pred = pipeline_smote.predict(X_test)
+>>> print(classification_report_imbalanced(y_test, y_pred))
+                   pre       rec       spe        f1       geo       iba       sup
+
+          0       0.83      0.94      1.00      0.88      0.91      0.82        16
+          1       0.67      0.91      0.98      0.77      0.82      0.65        54
+          2       1.00      0.98      0.94      0.99      0.85      0.74      1180
+
+avg / total       0.98      0.98      0.95      0.98      0.85      0.74      1250
+```
+
+Complementary metrics specific to imbalance data set evaluation
+
+```python
+>>> from imblearn.metrics import sensitivity_specificity_support
+>>> from imblearn.metrics import geometric_mean_score
+>>> from imblearn.metrics import make_index_balanced_accuracy
+```
+
+---
+### Datasets module
+
+#### `fetch_datasets`
+
+```python
+>>> from imblearn.datasets import fetch_datasets
+>>> dataset = fetch_datasets(filter_data=['satimage'])
+{'DESCR': 'satimage',
+ 'data': array([[  92.,  115.,  120., ...,  107.,  113.,   87.],
+                [  84.,  102.,  106., ...,   99.,  104.,   79.],
+                [  84.,  102.,  102., ...,   99.,  104.,   79.],
+                ...,
+                [  56.,   68.,   91., ...,   83.,   92.,   74.],
+                [  56.,   68.,   87., ...,   83.,   92.,   70.],
+                [  60.,   71.,   91., ...,   79.,  108.,   92.]]),
+ 'target': array([-1, -1, -1, ..., -1, -1, -1])}
+```
+
+#### `make_imbalance`
+
+```python
+>>> from sklearn.datasets import load_iris
+>>> from imblearn.datasets import make_imbalance
+>>> iris = load_iris()
+>>> X, y = iris.data, iris.target
+>>> X_imb, y_imb = make_imbalance(X, y, ratio={0: 50, 1: 20, 2: 25})
+Counter({0: 50, 1: 20, 2: 25})
+```
+
+---
+class: center, middle
+
+# What's new in 0.4?
+
+---
+Adding new methods:
+
+* `BalancedBaggingClassifier` / `BalancedRandomForestClassifier`
+* `EasyEnsembleClassifier`/ `BalanceCascadeClassifier` (in progress)
+* `FunctionSampler` -> [Example](http://contrib.scikit-learn.org/imbalanced-learn/dev/auto_examples/plot_outlier_rejections.html#sphx-glr-auto-examples-plot-outlier-rejections-py)
+* Keras and tensorflow mini-batches sampling -> [Examples](
+http://contrib.scikit-learn.org/imbalanced-learn/dev/auto_examples/applications/porto_seguro_keras_under_sampling.html#sphx-glr-auto-examples-applications-porto-seguro-keras-under-sampling-py)
+
+
+```python
+def fit_predict_balanced_model(X_train, y_train, X_test, y_test):
+    model = make_model(X_train.shape[1])
+    training_generator = BalancedBatchGenerator(X_train, y_train,
+                                                batch_size=1000,
+                                                random_state=42)
+    model.fit_generator(generator=training_generator, epochs=5, verbose=1)
+    y_pred = model.predict_proba(X_test, batch_size=1000)
+    return roc_auc_score(y_test, y_pred)
+```
+
+---
+### How to install it ...
+
+#### Via `pip`
+
+```
+$ pip install imbalanced-learn
+```
+
+#### Via `conda`
+
+```
+$ conda install -c conda-forge imbalanced-learn
+```
+
+### Perspectives
+
+#### Support categorical features
+#### Cython criterion which could be imported in scikit-learn decision trees
+#### Implementation of SMOTE variants
+#### Integration to scikit-learn
+
+    </textarea>
+<!--    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>-->
+    <script src="../remark.min.js" type="text/javascript">
+    </script>
+    <script>
+	    remark.macros.scale = function (percentage) {
+          var url = this;
+          return '<img src="' + url + '" style="width: ' + percentage + '" />';
+      };
+      remark.macros.scaleH = function (percentage) {
+          var url = this;
+          return '<img src="' + url + '" style="height: ' + percentage + '" />';
+      };
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
