@@ -134,10 +134,21 @@ class: center, middle
 for weight_minority in [0.05, 0.1, 0.2, 0.5]:
     X, y = make_classification(weight=(weight_minority, 1 - weight_minority))
     X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
+```
+<center>![:scale 60%](img/new_img/imbalanced_ratio.png)</center>
+
+
+---
+### Learning becomes difficult
+
+```python
+for weight_minority in [0.05, 0.1, 0.2, 0.5]:
+    X, y = make_classification(weight=(weight_minority, 1 - weight_minority))
+    X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y)
     svc = SVM().fit(X_train, y_test)
     roc_auc_score(y_test, svc.predict(X_test))
 ```
-<center>![:scale 60%](img/new_img/imbalanced_ratio.png)</center>
+<center>![:scale 60%](img/new_img/imbalanced_svm.png)</center>
 
 ---
 class: center, middle
@@ -229,11 +240,11 @@ for sampling_strategy in [0.3, 0.5, 0.7, 1]:
 count: false
 ## Supervised learning - Resampling
 
-<center>![:scale 70%](img/new_img/resampling.png)</center>
+<center>![:scale 85%](img/new_img/resampling.png)</center>
 
 ---
 class: center, middle
-# What scikit-learn offers?
+# What scikit-learn is missing for sampling?
 
 ---
 ### Transformers in scikit-learn
@@ -344,7 +355,7 @@ class: center, middle
 Counter({-1: 5809, 1: 5809})
 ```
 
-### Replaced `ratio` by `sampling_strategy`
+### `sampling_strategy` parameters
 
 * `str`: `'auto'`, `'all'`, `'minority'`, `'majority'`, `'not_minority'`
 * `float`: ratio |majority| / |minority|
@@ -371,7 +382,7 @@ Counter({-1: 5809, 1: 5809})
 * SMOTE + ENN / SMOTE + Tomek
 
 ---
-## How to use them?
+## How to use samplers in practise?
 
 ### `Pipeline` and `make_pipeline`
 
@@ -403,6 +414,8 @@ Counter({-1: 5809, 1: 5809})
 ```
 
 ---
+## Addtional helper modules
+
 ### Metrics module
 
 ```python
@@ -427,6 +440,8 @@ Complementary metrics specific to imbalance data set evaluation
 ```
 
 ---
+## Addtional helper modules
+
 ### Datasets module
 
 #### `fetch_datasets`
@@ -437,9 +452,7 @@ Complementary metrics specific to imbalance data set evaluation
 {'DESCR': 'satimage',
  'data': array([[  92.,  115.,  120., ...,  107.,  113.,   87.],
                 [  84.,  102.,  106., ...,   99.,  104.,   79.],
-                [  84.,  102.,  102., ...,   99.,  104.,   79.],
                 ...,
-                [  56.,   68.,   91., ...,   83.,   92.,   74.],
                 [  56.,   68.,   87., ...,   83.,   92.,   70.],
                 [  60.,   71.,   91., ...,   79.,  108.,   92.]]),
  'target': array([-1, -1, -1, ..., -1, -1, -1])}
@@ -465,7 +478,7 @@ class: center, middle
 Adding new methods:
 
 * `BalancedBaggingClassifier` / `BalancedRandomForestClassifier`
-* `EasyEnsembleClassifier`/ `BalanceCascadeClassifier` (in progress)
+* `EasyEnsembleClassifier`/ `BalanceCascadeClassifier`
 * `FunctionSampler` -> [Example](http://contrib.scikit-learn.org/imbalanced-learn/dev/auto_examples/plot_outlier_rejections.html#sphx-glr-auto-examples-plot-outlier-rejections-py)
 * Keras and tensorflow mini-batches sampling -> [Examples](
 http://contrib.scikit-learn.org/imbalanced-learn/dev/auto_examples/applications/porto_seguro_keras_under_sampling.html#sphx-glr-auto-examples-applications-porto-seguro-keras-under-sampling-py)
