@@ -157,13 +157,14 @@ class: center, middle
 ---
 class: center, middle
 # It depends ...
-
----
-count: false
-class: center, middle
-# It depends ...
 # -
 # 3 different perspectives
+
+---
+class: center, middle
+# Unsupervised learning
+# -
+# Outlier detection
 
 ---
 ### Unsupervised learning - Outlier detection
@@ -200,6 +201,13 @@ count: false
 <center>![:scale 60%](img/new_img/outlier_detection.png)</center>
 
 ---
+class: center, middle
+# Semi-supervised learning
+# -
+# Novelty detection
+
+
+---
 ### Semi-supervised learning - Novelty detection
 
 `X` contains outliers. They are **far** from others.
@@ -218,7 +226,14 @@ roc_auc_score(y_test, svm.predict(X_test))
 <center>![:scale 40%](img/new_img/novelty_detection.png)</center>
 
 ---
-## Supervised learning - Resampling
+class: center, middle
+# Supervised learning
+# -
+# Resampling
+
+
+---
+### Supervised learning - Resampling
 
 => Resample the data set before training the classifier.
 
@@ -238,7 +253,7 @@ for sampling_strategy in [0.3, 0.5, 0.7, 1]:
 
 ---
 count: false
-## Supervised learning - Resampling
+### Supervised learning - Resampling
 
 <center>![:scale 85%](img/new_img/resampling.png)</center>
 
