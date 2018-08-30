@@ -2,6 +2,24 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# Euroscipy 2018
+
+## Imbalanced-learn: A scikit-learn-contrib to tackle learning from imbalanced data set
+
+*Abstract*: The curse of imbalanced data set refers to data sets in which the
+number of samples in one class is less than in others. This issue is often
+encountered in real world data sets such as medical imaging applications
+(e.g. cancer detection), fraud detection, etc. In such particular condition,
+machine learning algorithms learn sub-optimal models which will generally favor
+the class having the largest number of samples. In this talk, we review the
+different available strategy to learn a statistical model under those specific
+condition. Then, we will present `imbalanced-learn` package and the new
+features which will be released in the new version 0.4.
+
+<a href="2018_euroscipy" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://github.com/scikit-learn-contrib/imbalanced-learn" class="btn"> <i class="fa fa-github"></i> Package</a>
+
+
 # CDS Pitching Day 2017
 
 ## RAMP on predicting autism from resting-state functional MRI and anatomical MRI
