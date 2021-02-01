@@ -2,11 +2,15 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# Interpretability Workshop 2021
+
+<a href="2021_interpretability_workshop" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
 # Euroscipy 2018
 
 ## Imbalanced-learn: A scikit-learn-contrib to tackle learning from imbalanced data set
 
-*Abstract*: The curse of imbalanced data set refers to data sets in which the
+_Abstract_: The curse of imbalanced data set refers to data sets in which the
 number of samples in one class is less than in others. This issue is often
 encountered in real world data sets such as medical imaging applications
 (e.g. cancer detection), fraud detection, etc. In such particular condition,
@@ -19,12 +23,11 @@ features which will be released in the new version 0.4.
 <a href="2018_euroscipy" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
 <a href="https://github.com/scikit-learn-contrib/imbalanced-learn" class="btn"> <i class="fa fa-github"></i> Package</a>
 
-
 # CDS Pitching Day 2017
 
 ## RAMP on predicting autism from resting-state functional MRI and anatomical MRI
 
-*Abstract*: This talk will present the ongoing preparation of a RAMP aiming at
+_Abstract_: This talk will present the ongoing preparation of a RAMP aiming at
 distinguishing subjects with Autism Spectrum Disorder (ASD) from typical
 control subjects. This analysis will use the Autism Brain Imaging Data Exchange
 (ABIDE I & II) database and data from Robert Debre Hospital based on R-fMRI and
@@ -39,7 +42,7 @@ the Unit of Human Genetics and Cognitive Functions).
 
 ## Leverage knowledge from under-represented classes in machine learning: imbalanced-learn release 0.3.0
 
-*Abstract*: The curse of imbalanced data set refers to data sets in which the
+_Abstract_: The curse of imbalanced data set refers to data sets in which the
 number of samples in one class is less than in others. This issue is often
 encountered in real world data sets such as medical imaging applications
 (e.g. cancer detection), fraud detection, etc. In such particular condition,
@@ -50,12 +53,11 @@ new feature which are available in the release 0.3.0.
 <a href="2017_euroscipy" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
 <a href="https://github.com/scikit-learn-contrib/imbalanced-learn" class="btn"> <i class="fa fa-github"></i> Package</a>
 
-
 # PyParis 2017
 
 ## Leverage knowledge from under-represented classes in machine learning: an introduction to imbalanced-learn
 
-*Abstract*: The curse of imbalanced data set refers to data sets in which the
+_Abstract_: The curse of imbalanced data set refers to data sets in which the
 number of samples in one class is less than in others. This issue is often
 encountered in real world data sets such as medical imaging applications
 (e.g. cancer detection), fraud detection, etc. In such particular condition,

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Interpretability in scikit-learn</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <a href="https://www.inria.fr/en/la-fondation-inria">
+            <img style="height: 100px; padding-left: 15px; padding-right: 15px;" src="img/inria_fondation_logo.png"/>
+          </a>
+          <a href="https://scikit-learn.fondation-inria.fr/home/">
+            <img style="height: 100px; padding-left: 15px; padding-right: 15px;" src="img/scikit_learn_foundation_logo.png"/>
+          </a>
+          <a href="https://scikit-learn.org">
+            <img style="height: 100px; padding-left: 15px; padding-right: 15px;" src="img/scikit_learn_logo.png"/>
+          </a>
+          <h3>Interpretability in scikit-learn</h1>
+          <p><small>
+            Current status and limitations, and ongoing work <br/>
+          </small></p>
+          <p><small>
+            <a href="https://glemaitre.github.io/">Guillaume Lemaitre</a> <br/> Interpretability Workshop <br/> February 8, 2021 <br/>
+          </small></p>
+        </section>
+        <section>
+          <h2>Agenda</h2>
+          <ol>
+            <li>Interpretability in scikit-learn</li>
+            <ul>
+              <li>Model-based inspection</li>
+              <li>Model agnostic inspection</li>
+            </ul>
+            <li>Ongoing work</li>
+            <li>Future work</li>
+          </ol>
+        </section>
+        <section>
+          <h4>Model-based inspection - Linear Models</h4>
+          <p><small>
+            Weights of linear models are keys to understand model's decisions
+          </small></p>
+          <pre><code class="py-repl" data-trim data-line-numbers>
+            X, y = load_breast_cancer(return_X_y=True, as_frame=True)
+            model = make_pipeline(
+                StandardScaler(), LogisticRegression()).fit(X, y)
+            model[-1].coef_
+          </code></pre>
+          <pre><code class="py-repl" data-trim data-line-numbers>
+            array([[-0.29792942, -0.58056355, -0.3109406 , -0.377129  , -0.11984232,
+                    0.42855478, -0.71131106, -0.85371164, -0.46688191,  0.11762548,
+                    -1.38262136,  0.0899184 , -0.94778563, -0.94686238,  0.18575731,
+                    0.99305313,  0.11090349, -0.3458275 ,  0.20290919,  0.80470317,
+                    -0.91626377, -0.91726667, -0.8159834 , -0.86539197, -0.45539191,
+                    0.10347391, -0.83009341, -0.98445173, -0.5920036 , -0.61086989]])
+          </code></pre>
+        </section>
+        <section>
+          <h4>Model-based inspection - Linear Models</h4>
+          <p><small>
+            Interact with pandas to enable some visualization
+          </small></p>
+          <pre><code class="py-repl" data-trim data-line-numbers>
+            coef = pd.Series(model[-1].coef_[0], index=X.columns)
+            coef.plot.bar()
+          </code></pre>
+          <img style="height: 450px" src="img/coef_breat_cancer.png"/>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
