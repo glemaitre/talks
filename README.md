@@ -31,6 +31,56 @@ overview of the available tools in `scikit-learn` and `shap`.
 
 <a href="https://docs.google.com/presentation/d/14N8f3wGDG25Yz6mBXDvpsnbzTII_RYR7WsFEXh10H94/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
 
+# Euler Hermes 2019
+
+## Learning from imbalanced datasets: state of the art
+
+*Abstract*: This presentation gives an overview of the state of the art of
+predictive modelling with imbalanced datasets.
+
+<a href="https://docs.google.com/presentation/d/1_JIhDMNG21B4fVU0ceCyQ39ReOqWYGdaVDELn63Ck2Y/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
+
+# Euroscipy 2019
+
+## Rapid Analytics & Model Prototyping (RAMP)
+
+*Abstract*: We will give an overview of the RAMP framework, which provides a
+platform to organize reproducible and transparent data challenges. RAMP
+workflow is a python package used to define and formalize the data science
+problem to be solved. It can be used as a standalone package and allows a user
+to prototype different solutions. In addition to RAMP workflow, a set of
+packages have been developed allowing to share and collaborate around the
+developer solutions. Therefore, RAMP database provides a database structure to
+store the solutions of different users and the performance of these solutions.
+RAMP engine is the package to run the user solutions (possibly on the cloud)
+and populate the database. Finally, RAMP frontend is the web frontend where
+users can upload their solutions and which shows the leaderboard of the
+challenge. The project is open-source and can be deployed on any local server.
+The framework has been used at the Paris-Saclay Center for Data Science for
+setting up and solving about twenty scientific problems, for organizing
+collaborative data challenges, for organizing scientific sub-communities around
+these events, and for training novice data scientists.
+
+
+<a href="https://docs.google.com/presentation/d/12wliUZ_A-7l28gjSoSkUe2MUnCEHM2ijNuqA3A1Xq_g/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://github.com/paris-saclay-cds/ramp-board" class="btn"> <i class="fa fa-github"></i> RAMP board</a>
+<a href="https://github.com/paris-saclay-cds/ramp-workflow" class="btn"> <i class="fa fa-github"></i> RAMP workflow</a>
+
+## Introduction to `scikit-learn`: from model fitting to model interpretation
+
+
+*Abstract*: Our introduction to scikit-learn will be subdivided into 2 parts.
+We will give a general introduction to scikit-learn presenting basic concepts
+around cross-validation, pipeline estimator, and hyperparameter search. Then,
+we will focus on model interpretation presenting the challenges and the
+available tools to understand a trained machine-learning model: partial
+independence plot, features importance, LIME, shapley values, etc.
+
+
+<a href="http://ogrisel.github.io/decks/2017_intro_sklearn/#1" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://github.com/lesteve/euroscipy-2019-scikit-learn-tutorial" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+
 # Euroscipy 2018
 
 ## Imbalanced-learn: A scikit-learn-contrib to tackle learning from imbalanced data set
