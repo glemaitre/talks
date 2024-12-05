@@ -2,6 +2,41 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# Sample space podcast 2024
+
+## Imbalanced-learn: regrets and onwards
+
+*Abstract*: Imbalanced-learn is one of the most popular `scikit-learn` projects
+out there. It has support for resampling techniques which historically have
+always been used for imbalanced classification use-cases. However, now that we
+are a few years down the line, it may be time to start rethinking the library.
+As it turns out, other techniques may be preferable.
+
+<a href="https://www.youtube.com/watch?v=npSkuNcm-Og&t=101s&ab_channel=probabl" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
+
+# Practical AI podcast 2024
+
+## scikit-learn & data science you own
+
+*Abstract*: We are at GenAI saturation, so let’s talk about `scikit-learn`, a long time
+favorite for data scientists building classifiers, time series analyzers, dimensionality
+reducers, and more! `Scikit-learn` is deployed across industry and driving a significant
+portion of the “AI” that is actually in production. :probabl is a new kind of company
+that is stewarding this project along with a variety of other open source projects. Yann
+Lechelle and Guillaume Lemaitre share some of the vision behind the company and talk
+about the future of `scikit-learn`!
+
+<a href="https://changelog.com/practicalai/296" class="btn"> <i class="fa fa-headphones"></i> Podcast</a>
+
+# ENGIE 2024
+
+## scikit-learn: community insights & latest features
+
+*Abstract*: Insights regarding the `scikit-learn` community and some new features
+available in the latest versions.
+
+<a href="https://docs.google.com/presentation/d/1v6Ug4LQ5pXegFHn648mtOgMBijCVAK8TK1jib7nVhoM/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
 # PyData Paris 2024
 
 ## An update on the latest scikit-learn features
@@ -11,13 +46,54 @@ features that have been implemented in versions 1.4 and 1.5. We will
 particularly discuss the following features:
 
 - the metadata routing API allowing to pass metadata around estimators;
-- the `TunedThresholdClassifierCV` allowing to tuned operational decision through custom metric;
+- the `TunedThresholdClassifierCV` allowing to tuned operational decision through custom
+  metric;
 - better support for categorical features and missing values;
 - interoperability of array and dataframe.
 
 <a href="https://docs.google.com/presentation/d/18XZcuokdTafTay8HKZzO0KkZnfuL3WkIhrbwjCJsvJc/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
 <a href="https://www.youtube.com/watch?v=PlCn-hqdMLw&ab_channel=PyData" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
 <a href="https://github.com/probabl-ai/sklearn-updates-pydata-paris-2024" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+
+# EuroSciPy 2024
+
+## Probabilistic classification and cost-sensitive learning with scikit-learn
+
+*Tutorial*: Data scientists are repeatedly told that it is absolutely critical to align
+their model training methodology with a specific business objective. While being a
+rather good advice, it usually falls short on details on how to achieve this in
+practice.
+
+This hands-on tutorial aims to introduce helpful theoretical concepts and concrete
+software tools to help them bridge this gap. This method will be illustrated on a worked
+practical use case: optimizing the operations of a fraud detection system for a payment
+processing platform.
+
+More specifically, we will introduce the concepts of calibrated probabilistic
+classifiers, how to evaluate them and fix common causes of mis-calibration. In a second
+part, we will explore how to turn probabilistic classifiers into optimal business
+decision makers.
+
+<a href="https://docs.google.com/presentation/d/1EW3alaVuUKzk8aCWONxpBQQ1LqCmFHNixIwbnfgjuSA/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://github.com/probabl-ai/calibration-cost-sensitive-learning" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+
+# DeepLabCut AI Residency 2024
+
+## scikit-learn: An OSS community-driven development
+
+*Abstract*: This talk provides insights regarding the `scikit-learn` community
+and the development of the library.
+
+<a href="https://docs.google.com/presentation/d/1o_dBt-ni6is2mzSGUaUam3a0aZ869BQ9Mx4BRxbyG5Y/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
+# Sacl-AI 2024
+
+## Introduction to machine learning in Python
+
+*Tutorial*: This tutorial provides an introduction to machine learning in Python,
+notably using `scikit-learn`.
+
+<a href="https://github.com/glemaitre/sacl-ai-2024" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
 
 # PyConDE & PyData Berlin 2022
 
