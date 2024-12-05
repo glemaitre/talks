@@ -95,6 +95,15 @@ notably using `scikit-learn`.
 
 <a href="https://github.com/glemaitre/sacl-ai-2024" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
 
+# DataTalksClub podcast 2024
+
+## Insights regarding the scikit-learn project
+
+*Abstract*: This podcast discusses some insights regarding the `scikit-learn` project
+and `imbalanced-learn` project.
+
+<a href="https://www.youtube.com/watch?v=RR6xaYqKJ3o&ab_channel=DataTalksClub%E2%AC%9B" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
+
 # PyCon Italia 2024
 
 ## A Retrieval Augmented Generation system to query the scikit-learn documentation
