@@ -2,6 +2,23 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# PyData Paris 2024
+
+## An update on the latest scikit-learn features
+
+*Abstract*: In this talk, we provide an update on the latest `scikit-learn`
+features that have been implemented in versions 1.4 and 1.5. We will
+particularly discuss the following features:
+
+- the metadata routing API allowing to pass metadata around estimators;
+- the `TunedThresholdClassifierCV` allowing to tuned operational decision through custom metric;
+- better support for categorical features and missing values;
+- interoperability of array and dataframe.
+
+<a href="https://docs.google.com/presentation/d/18XZcuokdTafTay8HKZzO0KkZnfuL3WkIhrbwjCJsvJc/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://www.youtube.com/watch?v=PlCn-hqdMLw&ab_channel=PyData" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
+<a href="https://github.com/probabl-ai/sklearn-updates-pydata-paris-2024" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+
 # PyConDE & PyData Berlin 2022
 
 ## Inspect an try to interpret your `scikit-learn` machine-learning models
