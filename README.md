@@ -95,6 +95,163 @@ notably using `scikit-learn`.
 
 <a href="https://github.com/glemaitre/sacl-ai-2024" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
 
+# PyCon Italia 2024
+
+## A Retrieval Augmented Generation system to query the scikit-learn documentation
+
+*Abstract*: Rubber ducks are used for many years to help Pythonistas in their everyday
+quest. At scikit-learn, we’ve elevated ducky to another level: come and meet the
+scikit-learn Ragger Duck, a RAG system designed to answer all your scikit-learn
+questions – at least as effectively as a duck can.
+
+<a href="https://drive.google.com/file/d/1fa0bK2WlJN1Y9Nr8rik7fDvzUVMpbzWT/view?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://papers.probabl.ai/a-rag-from-scratch-to-query-the-scikit-learn-documentation" class="btn"> <i class="fa fa-file-text"></i> Blog post</a>
+<a href="https://github.com/probabl-ai/sklearn-ragger-duck" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+
+
+# PyConDE & PyData Berlin 2024
+
+## A Retrieval Augmented Generation system to query the scikit-learn documentation
+
+*Abstract*: The scikit-learn website currently employs an "exact" search engine based on
+the Sphinx Python package, but it has limitations: it cannot handle spelling mistakes
+and queries based on natural language. To address these constraints, we experimented
+with using large language models (LLMs) and opted for a retrieval augmented generation
+(RAG) system due to resource constraints.
+
+This talk introduces our experimental RAG system for querying scikit-learn
+documentation. We focus on an open-source software stack and open-weight models. The
+talk presents the different stages of the RAG pipeline. We provide documentation
+scraping strategies that we designed based on numpydoc and sphinx-gallery, which are
+used to build vector indices for the lexical and semantic searches. We compare our RAG
+approach with an LLM-only approach to demonstrate the advantage of providing context.
+The source code for this experiment is available on GitHub:
+https://github.com/glemaitre/sklearn-ragger-duck.
+
+Finally, we discuss the gains and challenges of integrating such a system into an
+open-source project, including hosting and cost considerations, comparing it with
+alternative approaches.
+
+<a href="https://drive.google.com/file/d/1ko3NTI8r56nMdgOqKhR61M0b3lfwM9Bq/view?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://papers.probabl.ai/a-rag-from-scratch-to-query-the-scikit-learn-documentation" class="btn"> <i class="fa fa-file-text"></i> Blog post</a>
+<a href="https://www.youtube.com/watch?v=a1F_qOn11xc&t=2s&ab_channel=PyData" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
+<a href="https://github.com/probabl-ai/sklearn-ragger-duck" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+
+# CDiscount 2024
+
+## Get the best from your scikit-learn classifier
+
+*Abstract*: When operating a classifier in a production setting (i.e. predictive phase),
+practitioners are interested in potentially two different outputs: a "hard" decision
+used to leverage a business decision or/and a "soft" decision to get a confidence score
+linked to each potential decision (e.g. usually related to class probabilities).
+
+Scikit-learn does not provide any flexibility to go from "soft" to "hard" predictions:
+it uses a cut-off point at a confidence score of 0.5 (or 0 when using decision_function)
+to get class labels. However, optimizing a classifier to get a confidence score close to
+the true probabilities (i.e. a calibrated classifier) does not guarantee to obtain
+accurate "hard" predictions using this heuristic. Reversely, training a classifier for
+an optimum "hard" prediction accuracy (with the cut-off constraint at 0.5) does not
+guarantee obtaining a calibrated classifier.
+
+In this talk, we will present a new scikit-learn meta-estimator allowing us to get the
+best of the two worlds: a calibrated classifier providing optimum "hard" predictions.
+This meta-estimator will land in a future version of scikit-learn:
+https://github.com/scikit-learn/scikit-learn/pull/26120.
+
+We will provide some insights regarding the way to obtain accurate probabilities and
+predictions and also illustrate how to use in practice this model on different use
+cases: cost-sensitive problems and imbalanced classification problems.
+
+<a href="https://drive.google.com/file/d/1qOgRoGUEXdcNq0AWTTK12D4MVjUqfFEK/view?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
+# PyData Paris Meetup 2024
+
+## Get the best from your scikit-learn classifier
+
+*Abstract*: When operating a classifier in a production setting (i.e. predictive phase),
+practitioners are interested in potentially two different outputs: a "hard" decision
+used to leverage a business decision or/and a "soft" decision to get a confidence score
+linked to each potential decision (e.g. usually related to class probabilities).
+
+Scikit-learn does not provide any flexibility to go from "soft" to "hard" predictions:
+it uses a cut-off point at a confidence score of 0.5 (or 0 when using decision_function)
+to get class labels. However, optimizing a classifier to get a confidence score close to
+the true probabilities (i.e. a calibrated classifier) does not guarantee to obtain
+accurate "hard" predictions using this heuristic. Reversely, training a classifier for
+an optimum "hard" prediction accuracy (with the cut-off constraint at 0.5) does not
+guarantee obtaining a calibrated classifier.
+
+In this talk, we will present a new scikit-learn meta-estimator allowing us to get the
+best of the two worlds: a calibrated classifier providing optimum "hard" predictions.
+This meta-estimator will land in a future version of scikit-learn:
+https://github.com/scikit-learn/scikit-learn/pull/26120.
+
+We will provide some insights regarding the way to obtain accurate probabilities and
+predictions and also illustrate how to use in practice this model on different use
+cases: cost-sensitive problems and imbalanced classification problems.
+
+<a href="https://drive.google.com/file/d/1SmqGg9Ei36T8hTIrJwPvSTCivbAUuLVB/view?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+
+# PyData Global 2023
+
+## Get the best from your scikit-learn classifier
+
+*Abstract*: When operating a classifier in a production setting (i.e. predictive phase),
+practitioners are interested in potentially two different outputs: a "hard" decision
+used to leverage a business decision or/and a "soft" decision to get a confidence score
+linked to each potential decision (e.g. usually related to class probabilities).
+
+Scikit-learn does not provide any flexibility to go from "soft" to "hard" predictions:
+it uses a cut-off point at a confidence score of 0.5 (or 0 when using decision_function)
+to get class labels. However, optimizing a classifier to get a confidence score close to
+the true probabilities (i.e. a calibrated classifier) does not guarantee to obtain
+accurate "hard" predictions using this heuristic. Reversely, training a classifier for
+an optimum "hard" prediction accuracy (with the cut-off constraint at 0.5) does not
+guarantee obtaining a calibrated classifier.
+
+In this talk, we will present a new scikit-learn meta-estimator allowing us to get the
+best of the two worlds: a calibrated classifier providing optimum "hard" predictions.
+This meta-estimator will land in a future version of scikit-learn:
+https://github.com/scikit-learn/scikit-learn/pull/26120.
+
+We will provide some insights regarding the way to obtain accurate probabilities and
+predictions and also illustrate how to use in practice this model on different use
+cases: cost-sensitive problems and imbalanced classification problems.
+
+<a href="https://docs.google.com/presentation/d/1h2-GaOIFg2a_MpCUrfDjsyoUFgTawkwG-TebVj5CVF4/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://www.youtube.com/watch?v=Po7PRIBjRoQ&ab_channel=PyData" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
+
+
+# EuroSciPy 2023
+
+## Get the best from your scikit-learn classifier
+
+*Abstract*: When operating a classifier in a production setting (i.e. predictive phase),
+practitioners are interested in potentially two different outputs: a "hard" decision
+used to leverage a business decision or/and a "soft" decision to get a confidence score
+linked to each potential decision (e.g. usually related to class probabilities).
+
+Scikit-learn does not provide any flexibility to go from "soft" to "hard" predictions:
+it uses a cut-off point at a confidence score of 0.5 (or 0 when using decision_function)
+to get class labels. However, optimizing a classifier to get a confidence score close to
+the true probabilities (i.e. a calibrated classifier) does not guarantee to obtain
+accurate "hard" predictions using this heuristic. Reversely, training a classifier for
+an optimum "hard" prediction accuracy (with the cut-off constraint at 0.5) does not
+guarantee obtaining a calibrated classifier.
+
+In this talk, we will present a new scikit-learn meta-estimator allowing us to get the
+best of the two worlds: a calibrated classifier providing optimum "hard" predictions.
+This meta-estimator will land in a future version of scikit-learn:
+https://github.com/scikit-learn/scikit-learn/pull/26120.
+
+We will provide some insights regarding the way to obtain accurate probabilities and
+predictions and also illustrate how to use in practice this model on different use
+cases: cost-sensitive problems and imbalanced classification problems.
+
+<a href="https://docs.google.com/presentation/d/1IPXbEZpfrynjJMTXjI36rNGuPpOtY6_yJIrQOH6JBpI/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://www.youtube.com/watch?v=6YnhoCfArQo&t=239s&ab_channel=EuroSciPy" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
+
 # PyConDE & PyData Berlin 2022
 
 ## Inspect an try to interpret your `scikit-learn` machine-learning models
@@ -108,8 +265,8 @@ present other tools to interpret models (i.e. `shap`), not currently available
 in `scikit-learn`, but widely used in practice.
 
 <a href="https://docs.google.com/presentation/d/1xPf8vN9-pwZkAq28gbghJ9IWaNO4w-ZKO59193BWs34/edit?usp=sharing" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Slides</a>
+<a href="https://www.youtube.com/watch?v=V03NkNGEF3w&ab_channel=PyData" class="btn"> <i class="fa fa-youtube"></i> Videos</a>
 <a href="https://github.com/glemaitre/pydata_berlin_2022_scikit_learn_tutorial" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
-
 
 # PyLadies Paris 2022
 
