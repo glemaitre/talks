@@ -2,6 +2,18 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
+# TRACES winter school 2024
+
+## Introduction to machine learning in Python
+
+*Tutorial*: This tutorial introduces how to use scikit-learn to craft predictive models
+using machine learning. It covers the basics of machine learning: the evaluation,
+give insights about linear models, tree-based models, discussed about hyperparameter
+tuning and finally goes a bit into confidence intervals prediction.
+
+<a href="https://github.com/glemaitre/traces-sklearn" class="btn"> <i class="fa fa-github"></i> Tutorials repository</a>
+<a href="https://glemaitre.github.io/traces-sklearn/intro.html" class="btn"> <i class="fa fa-file-powerpoint-o"></i> Static course</a>
+
 # Sample space podcast 2024
 
 ## Imbalanced-learn: regrets and onwards
